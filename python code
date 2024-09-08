@@ -1,0 +1,136 @@
+import random
+def hangman():
+    list_of_words = dict({'algorithm' : 'computational thinking','template':'serves as a pattern','Google':'Source to find information', 'privacy':' keeping your personal information data safe','teamwork':'working together', 'Media ':'mobiles, ipads, laptops…..','windy ':'strong winds', 'settle': 'agreement upon', 'sunlight': 'light from sun','Cryptocurrency':'Digital or virtual currencies like Bitcoin','Xylophone':'A musical instrument with wooden bars that are struck with mallets','Kaleidoscope':'A tube containing mirrors and colorful glass pieces, creating beautiful patterns.','Biometrics':'The measurement and statistical analysis of peoples unique physical and behavioral characteristics','Firewall':'A network security device that monitors and filters incoming and outgoing network traffic.','Encryption':'The process of converting information into a code to secure it from unauthorized access.','Augmented Reality':'A technology that overlays computer-generated information onto the real world, often used in mobile apps and gaming.','Data Science':'The field of study that involves analyzing and extracting insights from data.','Puzzled':'A state of being confused or uncertain.','Jaguar': 'A large feline known for its distinctive spots.','Cyclone': 'A violent windstorm, often with a circular pattern','Velvet': 'A soft, smooth fabric often used for luxury clothing.','Jigsaw' : 'A puzzle with irregularly shaped pieces that fit together to form an image.', 'Abacus': 'A counting tool with beads used for arithmetic calculations.', 'Yacht': 'A recreational boat used for cruising or racing.', 'Javelin': 'A spear-like object thrown in track and field events.', 'Whisk': 'A kitchen utensil used for mixing ingredients.', 'Nectar': 'A sweet liquid found in flowers and collected by bees.', 'Quill': 'A writing instrument made from a birds feather.', 'Jinx': 'A superstition or a person believed to bring bad luck.', 'Jumble':' A mixed-up or confused arrangement.', 'Muffin': 'A small, baked quick bread often with sweet or savory flavors.','Toxin': 'A poisonous substance produced by living organisms.','Dizzy': 'A feeling of lightheadedness or disorientation.','Zebra': 'A black and white striped mammal found in Africa.','Mosaic':' Artwork made by arranging small pieces of colored material, such as glass or tiles.'
+})
+
+    word = random.choice(list(list_of_words.keys()))
+    hint = list_of_words[word]
+    print(hint)
+    turns=7
+    guessmade=""
+    valid_entry=set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW')
+    while len(word)>0:
+        main_word=""
+        missed=0
+        for letter in word:
+            if letter in guessmade:
+                 main_word=main_word+letter
+            else:
+                 main_word=main_word+'_ '
+        if main_word== word:
+             print(main_word)
+             print("YOU WON")
+             break
+
+        print("guess the word",main_word)
+        guess=input()
+        if guess in guessmade:
+            print("you have already guessed the letter")
+
+        if guess in valid_entry:
+            guessmade=guessmade+guess
+        else:
+                print("Enter Valid Character")
+                guess=input()
+
+        if guess not in word or guess not in guessmade:
+            turns=turns-1
+
+            if turns==6:
+                
+                print(""""
+                   --------
+                   |      |
+                   |      
+                   |    
+                   |      
+                   |     
+                   -
+                """)
+                print("6 turns left!!")
+            if turns==5:
+
+                  print("""
+                   --------
+                   |      |
+                   |      O
+                   |    
+                   |      
+                   |     
+                   -
+                """)
+                  print("5 turns left!!")
+
+            if turns==4:
+                  
+                  print( """
+                   --------
+                   |      |
+                   |      O
+                   |      |
+                   |      |
+                   |     
+                   -
+                """)
+                  print("4 turns left!!")
+
+            if turns==3:
+                  
+                  print("""
+                   --------
+                   |      |
+                   |      O
+                   |     \\|
+                   |      |
+                   |     
+                   -
+                """)
+                  print("3 turns left!!")
+
+            if turns==2:
+                  
+                  print( """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |      
+                   -
+                """)
+                  print("2 turns left!!")
+
+            if turns==1:
+                  print("""
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |     / 
+                   -
+                """)
+                  print("1 turns left!! hangman on his last breath")
+
+            if turns==0:
+                  print( """
+                   --------
+                   |      |
+                   |      O
+                   |     \\|/
+                   |      |
+                   |     / \\
+                   -
+                """)
+                  print("you loose")
+                  print("YOU LET A INNOCENT MAN DIE! :(")       
+                  print("The Word Was-",word)
+                  break
+
+name=input("ENTER YOUR NAME:")
+print("welcome",name,"!")
+print("_______________________")
+print("try to guess the word in less then 7 attempt")
+hangman()
+while input("play Again? (y/n)") == "y":
+    hangman()
